@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Management System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="text-center mb-4">
+                        <h3 class="text-white">Sales Management</h3>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" href="/">
+                                <i class="fas fa-home me-2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/sellers">
+                                <i class="fas fa-users me-2"></i> Sellers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/products">
+                                <i class="fas fa-box me-2"></i> Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/sales">
+                                <i class="fas fa-shopping-cart me-2"></i> Sales
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card text-white bg-primary">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Sellers</h5>
+                                <p class="card-text display-4" th:text="${sellerCount ?: '0'}">0</p>
+                                <a href="/sellers" class="btn btn-light">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-white bg-success">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Products</h5>
+                                <p class="card-text display-4" th:text="${productCount ?: '0'}">0</p>
+                                <a href="/products" class="btn btn-light">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-white bg-info">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Sales</h5>
+                                <p class="card-text display-4" th:text="${saleCount ?: '0'}">0</p>
+                                <a href="/sales" class="btn btn-light">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRUD Operations Cards -->
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                <h5 class="mb-0">Sellers Management</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="/sellers" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-list me-2"></i> List All Sellers
+                                    </a>
+                                    <a href="/sellers/new" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-user-plus me-2"></i> Add New Seller
+                                    </a>
+                                    <a href="/sellers/search" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-search me-2"></i> Search Sellers
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                <h5 class="mb-0">Products Management</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="/products" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-list me-2"></i> List All Products
+                                    </a>
+                                    <a href="/products/new" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-plus me-2"></i> Add New Product
+                                    </a>
+                                    <a href="/products/search" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-search me-2"></i> Search Products
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                <h5 class="mb-0">Sales Management</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="/sales" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-list me-2"></i> List All Sales
+                                    </a>
+                                    <a href="/sales/new" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-plus me-2"></i> Record New Sale
+                                    </a>
+                                    <a href="/sales/search" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-search me-2"></i> Search Sales
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                <h5 class="mb-0">Reports</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="list-group">
+                                    <a href="/reports/sales" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-chart-bar me-2"></i> Sales Reports
+                                    </a>
+                                    <a href="/reports/sellers" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-chart-line me-2"></i> Seller Performance
+                                    </a>
+                                    <a href="/reports/products" class="list-group-item list-group-item-action">
+                                        <i class="fas fa-chart-pie me-2"></i> Product Analytics
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/scripts.js}"></script>
+</body>
+</html> 
